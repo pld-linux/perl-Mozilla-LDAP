@@ -6,7 +6,7 @@ Version:	1.4.1
 Release:	7
 License:	MPL
 Group:		Development/Languages/Perl
-Source0:	ftp://ftp.mozilla.org/pub/directory/perldap/perldap-%{version}.tar.gz
+Source0:	http://ftp.mozilla.org/pub/mozilla.org/directory/perldap/perldap-%{version}.tar.gz
 # Source0-md5:	39a784c94f6fbed4682f681cd2f183fa
 BuildRequires:	mozilla-devel >= 1.0-10
 BuildRequires:	perl-devel >= 5.6.1
