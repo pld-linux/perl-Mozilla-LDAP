@@ -3,13 +3,13 @@ Summary:	PerLDAP - Mozilla::LDAP perl modules
 Summary(pl):	PerLDAP - modu³y perla Mozilla::LDAP
 Name:		perl-Mozilla-LDAP
 Version:	1.4.1
-Release:	6
+Release:	7
 License:	MPL
 Group:		Development/Languages/Perl
 Source0:	ftp://ftp.mozilla.org/pub/directory/perldap/perldap-%{version}.tar.gz
 BuildRequires:	mozilla-devel >= 1.0-10
 BuildRequires:	perl-devel >= 5.6.1
-BuildRequires:	rpm-perlprov >= 3.0.3-16
+BuildRequires:	rpm-perlprov >= 4.1-13
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -30,7 +30,8 @@ u³atwia przeszukiwanie, usuwanie i modyfikowanie pozycji.
 %setup -q -n perldap-%{version}
 
 %build
-%{__perl} Makefile.PL <<EOF
+%{__perl} Makefile.PL <<EOF \
+	INSTALLDIRS=vendor 
 /usr/X11R6
 yes
 yes
@@ -58,12 +59,12 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog CREDITS MPL-1.1.txt README RELEASE
-%{perl_sitearch}/Mozilla
-%dir %{perl_sitearch}/auto/Mozilla
-%dir %{perl_sitearch}/auto/Mozilla/LDAP
-%dir %{perl_sitearch}/auto/Mozilla/LDAP/API
-%{perl_sitearch}/auto/Mozilla/LDAP/API/autosplit.ix
-%{perl_sitearch}/auto/Mozilla/LDAP/API/API.bs
-%attr(755,root,root) %{perl_sitearch}/auto/Mozilla/LDAP/API/API.so
+%{perl_vendorarch}/Mozilla
+%dir %{perl_vendorarch}/auto/Mozilla
+%dir %{perl_vendorarch}/auto/Mozilla/LDAP
+%dir %{perl_vendorarch}/auto/Mozilla/LDAP/API
+%{perl_vendorarch}/auto/Mozilla/LDAP/API/autosplit.ix
+%{perl_vendorarch}/auto/Mozilla/LDAP/API/API.bs
+%attr(755,root,root) %{perl_vendorarch}/auto/Mozilla/LDAP/API/API.so
 %{_mandir}/man3/*
 %{_examplesdir}/%{name}-%{version}
