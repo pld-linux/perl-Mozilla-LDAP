@@ -1,10 +1,14 @@
+#
+# Conditional build:
+%bcond_without	tests	# do not perform "make test"
+#
 %include	/usr/lib/rpm/macros.perl
 Summary:	PerLDAP - Mozilla::LDAP perl modules
 Summary(pl):	PerLDAP - modu³y perla Mozilla::LDAP
 Name:		perl-Mozilla-LDAP
 Version:	1.4.1
 Release:	7
-License:	MPL
+License:	MPL 1.1
 Group:		Development/Languages/Perl
 Source0:	http://ftp.mozilla.org/pub/mozilla.org/directory/perldap/perldap-%{version}.tar.gz
 # Source0-md5:	39a784c94f6fbed4682f681cd2f183fa
@@ -42,6 +46,8 @@ EOF
 
 %{__make} \
 	OPTIMIZE="%{rpmcflags} -I/usr/include/mozilla/ldap"
+
+%{?with_tests:%{__make} test}
 
 %install
 rm -rf $RPM_BUILD_ROOT
