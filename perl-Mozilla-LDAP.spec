@@ -6,20 +6,6 @@ Version:	1.4.1
 Release:	2
 License:	MPL
 Group:		Development/Languages/Perl
-Group(cs):	Vývojové prostøedky/Programovací jazyky/Perl
-Group(da):	Udvikling/Sprog/Perl
-Group(de):	Entwicklung/Sprachen/Perl
-Group(es):	Desarrollo/Lenguajes/Perl
-Group(fr):	Development/Langues/Perl
-Group(is):	Þróunartól/Forritunarmál/Perl
-Group(it):	Sviluppo/Linguaggi/Perl
-Group(ja):	³«È¯/¸À¸ì/Perl
-Group(no):	Utvikling/Programmeringsspråk/Perl
-Group(pl):	Programowanie/Jêzyki/Perl
-Group(pt):	Desenvolvimento/Linguagens/Perl
-Group(ru):	òÁÚÒÁÂÏÔËÁ/ñÚÙËÉ/Perl
-Group(sl):	Razvoj/Jeziki/Perl
-Group(sv):	Utveckling/Språk/Perl
 Source0:	ftp://ftp.mozilla.org/pub/directory/perldap/perldap-%{version}.tar.gz
 BuildRequires:	mozilla-embedded-devel
 BuildRequires:	perl-devel >= 5.6.1
