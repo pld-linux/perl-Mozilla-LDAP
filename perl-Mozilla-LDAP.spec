@@ -7,7 +7,7 @@ Summary:	PerLDAP - Mozilla::LDAP perl modules
 Summary(pl):	PerLDAP - modu³y perla Mozilla::LDAP
 Name:		perl-Mozilla-LDAP
 Version:	1.4.1
-Release:	8
+Release:	9
 License:	MPL 1.1
 Group:		Development/Languages/Perl
 Source0:	http://ftp.mozilla.org/pub/mozilla.org/directory/perldap/perldap-%{version}.tar.gz
@@ -34,6 +34,8 @@ u³atwia przeszukiwanie, usuwanie i modyfikowanie pozycji.
 %prep
 %setup -q -n perldap-%{version}
 
+%{__perl} -pi -e 's@"lib"@"%{_lib}"@' Makefile.PL
+
 %build
 %{__perl} Makefile.PL \
 	INSTALLDIRS=vendor \
@@ -41,7 +43,7 @@ u³atwia przeszukiwanie, usuwanie i modyfikowanie pozycji.
 /usr
 yes
 yes
--L/usr/X11R6/lib -lldap50 -lssldap50 -lprldap50 -lssl3 -lpthread
+-lldap50 -lssldap50 -lprldap50 -lssl3 -lpthread
 EOF
 
 %{__make} \
