@@ -7,7 +7,7 @@ Release:	4
 License:	MPL
 Group:		Development/Languages/Perl
 Source0:	ftp://ftp.mozilla.org/pub/directory/perldap/perldap-%{version}.tar.gz
-BuildRequires:	mozilla-embedded-devel >= 0.9.9
+BuildRequires:	mozilla-embedded-devel >= 1.0-9
 BuildRequires:	perl-devel >= 5.6.1
 BuildRequires:	rpm-perlprov >= 3.0.3-16
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -52,14 +52,12 @@ for f in *.pl ; do
 done
 )
 
-gzip -9nf ChangeLog CREDITS MPL-1.1.txt README RELEASE
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc ChangeLog CREDITS MPL-1.1.txt README RELEASE
 %{perl_sitearch}/Mozilla
 %dir %{perl_sitearch}/auto/Mozilla
 %dir %{perl_sitearch}/auto/Mozilla/LDAP
