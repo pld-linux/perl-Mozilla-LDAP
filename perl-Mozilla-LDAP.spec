@@ -3,11 +3,11 @@ Summary:	PerLDAP - Mozilla::LDAP perl modules
 Summary(pl):	PerLDAP - modu³y perla Mozilla::LDAP
 Name:		perl-Mozilla-LDAP
 Version:	1.4.1
-Release:	5
+Release:	6
 License:	MPL
 Group:		Development/Languages/Perl
 Source0:	ftp://ftp.mozilla.org/pub/directory/perldap/perldap-%{version}.tar.gz
-BuildRequires:	mozilla-embedded-devel >= 1.0-9
+BuildRequires:	mozilla-embedded-devel >= 1.0-10
 BuildRequires:	perl-devel >= 5.6.1
 BuildRequires:	rpm-perlprov >= 3.0.3-16
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -31,13 +31,13 @@ u³atwia przeszukiwanie, usuwanie i modyfikowanie pozycji.
 
 %build
 perl Makefile.PL <<EOF
-%{_prefix}/X11R6
+/usr/X11R6
 yes
-no
--L%{_prefix}/X11R6/lib -lldap50 -lpthread
+yes
+-L/usr/X11R6/lib -lldap50 -lssldap50 -lprldap50 -lssl3 -lpthread
 EOF
 
-%{__make} OPTIMIZE="%{rpmcflags} -I%{_prefix}/X11R6/include/mozilla/ldap"
+%{__make} OPTIMIZE="%{rpmcflags} -I/usr/X11R6/include/mozilla/ldap"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -47,7 +47,7 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 (cd examples
 for f in *.pl ; do
-	sed -e 's@%{_bindir}/perl5@%{_bindir}/perl@' $f \
+	sed -e 's@/usr/bin/perl5@/usr/bin/perl@' $f \
 		> $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/$f
 done
 )
