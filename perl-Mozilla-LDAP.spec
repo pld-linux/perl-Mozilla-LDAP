@@ -30,7 +30,7 @@ u³atwia przeszukiwanie, usuwanie i modyfikowanie pozycji.
 %setup -q -n perldap-%{version}
 
 %build
-perl Makefile.PL <<EOF
+%{__perl} Makefile.PL <<EOF
 /usr/X11R6
 yes
 yes
