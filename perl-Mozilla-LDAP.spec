@@ -6,8 +6,14 @@ Version:	1.4.1
 Release:	1
 License:	MPL
 Group:		Development/Languages/Perl
+Group(cs):	Vývojové prostøedky/Programovací jazyky/Perl
 Group(de):	Entwicklung/Sprachen/Perl
+Group(es):	Desarrollo/Lenguajes/Perl
+Group(fr):	Development/Langues/Perl
+Group(ja):	³«È¯/¸À¸ì/Perl
 Group(pl):	Programowanie/Jêzyki/Perl
+Group(pt):	Desenvolvimento/Linguagens/Perl
+Group(ru):	òÁÚÒÁÂÏÔËÁ/ñÚÙËÉ/Perl
 Source0:	ftp://ftp.mozilla.org/pub/directory/perldap/perldap-%{version}.tar.gz
 BuildRequires:	mozilla-embedded-devel
 BuildRequires:	perl-devel >= 5.6.1
@@ -33,13 +39,13 @@ u³atwia przeszukiwanie, usuwanie i modyfikowanie pozycji.
 
 %build
 perl Makefile.PL <<EOF
-/usr/X11R6
+%{_prefix}/X11R6
 yes
 no
--L/usr/X11R6/lib -lldap40 -llber40
+-L%{_prefix}/X11R6/lib -lldap40 -llber40
 EOF
 
-%{__make} OPTIMIZE="%{rpmcflags} -I/usr/X11R6/include/mozilla/ldap"
+%{__make} OPTIMIZE="%{rpmcflags} -I%{_prefix}/X11R6/include/mozilla/ldap"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -49,7 +55,7 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 (cd examples
 for f in *.pl ; do
-	sed -e 's@/usr/bin/perl5@/usr/bin/perl@' $f \
+	sed -e 's@%{_bindir}/perl5@%{_bindir}/perl@' $f \
 		> $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/$f
 done
 )
