@@ -30,28 +30,28 @@ u³atwia przeszukiwanie, usuwanie i modyfikowanie pozycji.
 %setup -q -n perldap-%{version}
 
 %build
-%{__perl} Makefile.PL <<EOF \
-	INSTALLDIRS=vendor 
-/usr/X11R6
+%{__perl} Makefile.PL \
+	INSTALLDIRS=vendor \
+	<<EOF
+/usr
 yes
 yes
 -L/usr/X11R6/lib -lldap50 -lssldap50 -lprldap50 -lssl3 -lpthread
 EOF
 
-%{__make} OPTIMIZE="%{rpmcflags} -I/usr/X11R6/include/mozilla/ldap"
+%{__make} \
+	OPTIMIZE="%{rpmcflags} -I/usr/include/mozilla/ldap"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
-(cd examples
-for f in *.pl ; do
-	sed -e 's@/usr/bin/perl5@/usr/bin/perl@' $f \
-		> $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/$f
-done
-)
+%{__perl} -pi -e 's|/usr/bin/perl5|%{__perl}|' examples/*.pl
+rm -rf examples/CVS
+install -d $RPM_BUILD_ROOT%{_examplesdir}
+cp -r examples $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
