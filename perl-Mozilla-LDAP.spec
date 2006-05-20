@@ -13,7 +13,11 @@ License:	MPL 1.1
 Group:		Development/Languages/Perl
 Source0:	http://ftp.mozilla.org/pub/mozilla.org/directory/perldap/perldap-%{version}.tar.gz
 # Source0-md5:	39a784c94f6fbed4682f681cd2f183fa
+%if %{with seamonkey}
+BuildRequires:	seamonkey-devel >= 1.0
+%else
 BuildRequires:	mozilla-devel >= 1.0-10
+%endif
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
