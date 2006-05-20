@@ -1,6 +1,7 @@
 #
 # Conditional build:
 %bcond_without	tests	# do not perform "make test"
+%bcond_with	seamonkey	# build without seamonkey-devel
 #
 %include	/usr/lib/rpm/macros.perl
 Summary:	PerLDAP - Mozilla::LDAP perl modules
@@ -47,7 +48,12 @@ yes
 EOF
 
 %{__make} \
-	OPTIMIZE="%{rpmcflags} -I/usr/include/mozilla/ldap"
+	OPTIMIZE="%{rpmcflags} \
+%if %{with seamonkey}
+	-I/usr/include/seamonkey/ldap"
+%else
+	-I/usr/include/mozilla/ldap"
+%endif
 
 %{?with_tests:%{__make} test}
 
