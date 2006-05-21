@@ -1,25 +1,30 @@
 #
 # Conditional build:
 %bcond_without	tests	# do not perform "make test"
-%bcond_with	seamonkey	# build without seamonkey-devel
+%bcond_without	seamonkey	# build without seamonkey-devel
 #
 %include	/usr/lib/rpm/macros.perl
 Summary:	PerLDAP - Mozilla::LDAP perl modules
 Summary(pl):	PerLDAP - modu³y perla Mozilla::LDAP
 Name:		perl-Mozilla-LDAP
 Version:	1.4.1
-Release:	9
+Release:	10
 License:	MPL 1.1
 Group:		Development/Languages/Perl
 Source0:	http://ftp.mozilla.org/pub/mozilla.org/directory/perldap/perldap-%{version}.tar.gz
 # Source0-md5:	39a784c94f6fbed4682f681cd2f183fa
 %if %{with seamonkey}
-BuildRequires:	seamonkey-devel >= 1.0
+BuildRequires:	seamonkey-devel >= 1.0.1-2
 %else
-BuildRequires:	mozilla-devel >= 1.0-10
+BuildRequires:	mozilla-devel >= 1.7.13-3
 %endif
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
+%if %{with seamonkey}
+Requires:	seamonkey-libs = %(rpm -q --qf '%{EPOCH}:%{VERSION}' --whatprovides seamonkey-libs)
+%else
+Requires:	mozilla-libs = %(rpm -q --qf '%{EPOCH}:%{VERSION}' --whatprovides mozilla-libs)
+%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -48,7 +53,7 @@ u³atwia przeszukiwanie, usuwanie i modyfikowanie pozycji.
 /usr
 yes
 yes
--lldap50 -lssldap50 -lprldap50 -lssl3 -lpthread
+%{!?with_seamonkey:-L/usr/lib/mozilla}%{?with_seamonkey:-L/usr/lib/seamonkey} -lldap50 -lssldap50 -lprldap50 -lssl3 -lpthread
 EOF
 
 %{__make} \
