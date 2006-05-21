@@ -1,0 +1,5 @@
+- added lib paths (mozilla/seamonkey libs are no longer in /usr/lib)
+- bumped {mozilla,seamonkey}-devel BR versions
+- added R: {mozilla,seamonkey}-libs (depends on bcond)
+- build with seamonkey-devel by default
+- release 10
