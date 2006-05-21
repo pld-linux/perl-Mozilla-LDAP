@@ -53,7 +53,7 @@ u³atwia przeszukiwanie, usuwanie i modyfikowanie pozycji.
 /usr
 yes
 yes
-%{!?with_seamonkey:-L/usr/lib/mozilla}%{?with_seamonkey:-L/usr/lib/seamonkey} -lldap50 -lssldap50 -lprldap50 -lssl3 -lpthread
+%{!?with_seamonkey:-L/usr/%{_lib}/mozilla}%{?with_seamonkey:-L/usr/%{_lib}/seamonkey} -lldap50 -lssldap50 -lprldap50 -lssl3 -lpthread
 EOF
 
 %{__make} \
