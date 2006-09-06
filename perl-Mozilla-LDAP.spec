@@ -16,6 +16,7 @@ URL:		http://www.mozilla.org/directory/perldap.html
 BuildRequires:	mozldap-devel >= 5.17
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
+BuildRequires:	sed >= 4.0
 Requires:	mozldap >= 5.17
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -36,13 +37,15 @@ u³atwia przeszukiwanie, usuwanie i modyfikowanie pozycji.
 %prep
 %setup -q -n perldap-%{version}
 
-%{__perl} -pi -e 's@"lib"@"%{_lib}"@' Makefile.PL
+%{__sed} -i -e 's@"lib"@"%{_lib}"@' Makefile.PL
+%{__sed} -i -e 's|/usr/bin/perl5|%{__perl}|' examples/*.pl
+rm -rf examples/CVS
 
 %build
 %{__perl} Makefile.PL \
 	INSTALLDIRS=vendor \
 	<<EOF
-/usr
+%{_prefix}
 yes
 yes
 -lldap50 -lssldap50 -lprldap50 -lssl3 -lpthread
@@ -59,10 +62,11 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__perl} -pi -e 's|/usr/bin/perl5|%{__perl}|' examples/*.pl
-rm -rf examples/CVS
 install -d $RPM_BUILD_ROOT%{_examplesdir}
 cp -r examples $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+
+rm -f $RPM_BUILD_ROOT%{perl_archlib}/perllocal.pod
+rm -f $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Mozilla/LDAP/API/.packlist
 
 %clean
 rm -rf $RPM_BUILD_ROOT
