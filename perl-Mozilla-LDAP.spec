@@ -7,18 +7,20 @@ Summary:	PerLDAP - Mozilla::LDAP perl modules
 Summary(pl):	PerLDAP - modu³y perla Mozilla::LDAP
 Name:		perl-Mozilla-LDAP
 Version:	1.4.1
-Release:	13
+Release:	14
 License:	MPL 1.1
 Group:		Development/Languages/Perl
 Source0:	http://ftp.mozilla.org/pub/mozilla.org/directory/perldap/perldap-%{version}.tar.gz
 # Source0-md5:	39a784c94f6fbed4682f681cd2f183fa
 URL:		http://www.mozilla.org/directory/perldap.html
-BuildRequires:	mozldap-devel >= 5.17
+BuildRequires:	mozldap-devel >= 6.0
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
 BuildRequires:	sed >= 4.0
-Requires:	mozldap >= 5.17
+Requires:	mozldap >= 6.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_noautoreqdep	libldap60.so libprldap60.so libssldap60.so
 
 %description
 PerLDAP is a set of modules written in Perl and C that allow
@@ -48,7 +50,7 @@ rm -rf examples/CVS
 %{_prefix}
 yes
 yes
--lldap50 -lssldap50 -lprldap50 -lssl3 -lpthread
+-lldap60 -lssldap60 -lprldap60 -lssl3 -lpthread
 EOF
 
 %{__make} \
@@ -59,13 +61,12 @@ EOF
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
+%{__make} pure_install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_examplesdir}
 cp -r examples $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-rm -f $RPM_BUILD_ROOT%{perl_archlib}/perllocal.pod
 rm -f $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Mozilla/LDAP/API/.packlist
 
 %clean
