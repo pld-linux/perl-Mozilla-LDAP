@@ -6,14 +6,16 @@
 Summary:	PerLDAP - Mozilla::LDAP perl modules
 Summary(pl):	PerLDAP - modu³y perla Mozilla::LDAP
 Name:		perl-Mozilla-LDAP
-Version:	1.4.1
-Release:	14
+Version:	1.5
+Release:	1
 License:	MPL 1.1
 Group:		Development/Languages/Perl
-Source0:	http://ftp.mozilla.org/pub/mozilla.org/directory/perldap/perldap-%{version}.tar.gz
-# Source0-md5:	39a784c94f6fbed4682f681cd2f183fa
+Source0:	ftp://ftp.mozilla.org/pub/mozilla.org/directory/perldap/releases/%{version}/perl-mozldap-%{version}.tar.gz
+# Source0-md5:	16dfa7e7b3ea2eef496cd4fe920ac151
 URL:		http://www.mozilla.org/directory/perldap.html
 BuildRequires:	mozldap-devel >= 6.0
+BuildRequires:	nspr-devel >= 4.0
+BuildRequires:	nss-devel >= 3.0
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
 BuildRequires:	sed >= 4.0
@@ -37,24 +39,28 @@ dostêp do katalogów LDAP i zarz±dzanie nimi z poziomu Perla. PerLDAP
 u³atwia przeszukiwanie, usuwanie i modyfikowanie pozycji.
 
 %prep
-%setup -q -n perldap-%{version}
+%setup -q -n perl-mozldap-%{version}
 
-%{__sed} -i -e 's@"lib"@"%{_lib}"@' Makefile.PL
 %{__sed} -i -e 's|/usr/bin/perl5|%{__perl}|' examples/*.pl
-rm -rf examples/CVS
 
 %build
+export LDAPSDKDIR=/usr
+export LDAPSDKINCDIR=/usr/include/mozldap
+export LDAPSDKLIBDIR=%{_libdir}
+export LDAPSDKSSL=Y
+export LDAPPR=Y
+export NSPRDIR=/usr
+export NSPRINCDIR=/usr/include/nspr
+export NSPRLIBDIR=%{_libdir}
+export NSSDIR=/usr
+export NSSLIBDIR=%{_libdir}
 %{__perl} Makefile.PL \
 	INSTALLDIRS=vendor \
-	<<EOF
-%{_prefix}
-yes
-yes
--lldap60 -lssldap60 -lprldap60 -lssl3 -lpthread
-EOF
 
+# no option to pass libs to Makefile.PL, use LDLOADLIBS here
 %{__make} \
-	OPTIMIZE="%{rpmcflags} -I/usr/include/mozldap"
+	LDLOADLIBS="-lssldap60 -lprldap60 -lldap60 -lssl3 -lnss3 -lplc4 -lplds4 -lnspr4"
+	OPTIMIZE="%{rpmcflags}"
 
 %{?with_tests:%{__make} test}
 
