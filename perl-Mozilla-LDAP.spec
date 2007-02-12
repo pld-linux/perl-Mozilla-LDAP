@@ -4,7 +4,7 @@
 #
 %include	/usr/lib/rpm/macros.perl
 Summary:	PerLDAP - Mozilla::LDAP perl modules
-Summary(pl):	PerLDAP - modu³y perla Mozilla::LDAP
+Summary(pl.UTF-8):   PerLDAP - moduÅ‚y perla Mozilla::LDAP
 Name:		perl-Mozilla-LDAP
 Version:	1.5
 Release:	1
@@ -33,10 +33,10 @@ developers can easily build web applications to access information
 stored in a directory or create directory sync tools between
 directories and other services.
 
-%description -l pl
-PerLDAP to zestaw modu³ów napisanych w Perlu i C, pozwalaj±cych na
-dostêp do katalogów LDAP i zarz±dzanie nimi z poziomu Perla. PerLDAP
-u³atwia przeszukiwanie, usuwanie i modyfikowanie pozycji.
+%description -l pl.UTF-8
+PerLDAP to zestaw moduÅ‚Ã³w napisanych w Perlu i C, pozwalajÄ…cych na
+dostÄ™p do katalogÃ³w LDAP i zarzÄ…dzanie nimi z poziomu Perla. PerLDAP
+uÅ‚atwia przeszukiwanie, usuwanie i modyfikowanie pozycji.
 
 %prep
 %setup -q -n perl-mozldap-%{version}
