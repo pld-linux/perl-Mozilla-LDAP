@@ -4,7 +4,7 @@
 #
 %include	/usr/lib/rpm/macros.perl
 Summary:	PerLDAP - Mozilla::LDAP perl modules
-Summary(pl.UTF-8):   PerLDAP - moduły perla Mozilla::LDAP
+Summary(pl.UTF-8):	PerLDAP - moduły perla Mozilla::LDAP
 Name:		perl-Mozilla-LDAP
 Version:	1.5
 Release:	1
