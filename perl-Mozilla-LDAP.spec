@@ -6,12 +6,12 @@
 Summary:	PerLDAP - Mozilla::LDAP perl modules
 Summary(pl.UTF-8):	PerLDAP - moduły perla Mozilla::LDAP
 Name:		perl-Mozilla-LDAP
-Version:	1.5
+Version:	1.5.2
 Release:	1
-License:	MPL 1.1
+License:	MPL 1.1 or GPL v2+ or LGPL v2.1+
 Group:		Development/Languages/Perl
-Source0:	ftp://ftp.mozilla.org/pub/mozilla.org/directory/perldap/releases/%{version}/perl-mozldap-%{version}.tar.gz
-# Source0-md5:	16dfa7e7b3ea2eef496cd4fe920ac151
+Source0:	ftp://ftp.mozilla.org/pub/mozilla.org/directory/perldap/releases/%{version}/src/perl-mozldap-%{version}.tar.gz
+# Source0-md5:	1f7af40a8ca42f4a8b805942129915e0
 URL:		http://www.mozilla.org/directory/perldap.html
 BuildRequires:	mozldap-devel >= 6.0
 BuildRequires:	nspr-devel >= 4.0
