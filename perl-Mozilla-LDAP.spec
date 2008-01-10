@@ -59,6 +59,7 @@ export NSSLIBDIR=%{_libdir}
 
 # no option to pass libs to Makefile.PL, use LDLOADLIBS here
 %{__make} \
+	CC="%{__cc}" \
 	LDLOADLIBS="-lssldap60 -lprldap60 -lldap60 -lssl3 -lnss3 -lplc4 -lplds4 -lnspr4"
 	OPTIMIZE="%{rpmcflags}"
 
