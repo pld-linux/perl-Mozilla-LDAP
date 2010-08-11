@@ -1,0 +1,41 @@
+--- perl-mozldap-1.5.3/API.xs.orig	2010-08-03 22:27:49.000000000 +0200
++++ perl-mozldap-1.5.3/API.xs	2010-08-11 19:40:37.470825810 +0200
+@@ -673,7 +673,7 @@
+ bail:
+     ldap_set_option(ld, LDAP_OPT_RESULT_CODE, &ret);
+ #else
+-    ret = ldap_parse_entrychange_control(ld, ctrls, chgtypep, prevdnp
++    ret = ldap_parse_entrychange_control(ld, ctrls, chgtypep, prevdnp,
+                                          chgnumpresentp, chgnump);
+ #endif
+ 
+@@ -2130,6 +2130,7 @@
+ 	char *  url = NULL;
+ 	int     url_len = 0;
+ 	CODE:
++#ifdef USR_OPENLDAP
+ 	RETVAL = NULL;
+ 	/* Create the LDAP URL */
+ 	if (host && port) {
+@@ -2139,6 +2140,9 @@
+ 	   ldap_initialize(&RETVAL, url);
+ 	   perldap_free((void *)url);
+ 	}
++#else
++	RETVAL = ldap_init(host, atoi(port));
++#endif
+ 	OUTPUT:
+ 	RETVAL
+ 
+@@ -2843,7 +2847,11 @@
+ ldap_unbind_s(ld)
+ 	LDAP *		ld
+ 	CODE:
++#ifdef USE_OPENLDAP
+ 	RETVAL = ldap_unbind_ext_s(ld, NULL, NULL);
++#else
++	RETVAL = LDAP_NOT_SUPPORTED;
++#endif
+ 	OUTPUT:
+ 	RETVAL
+ 
