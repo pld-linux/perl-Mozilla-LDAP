@@ -89,7 +89,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{perl_vendorarch}/auto/Mozilla/LDAP
 %dir %{perl_vendorarch}/auto/Mozilla/LDAP/API
 %{perl_vendorarch}/auto/Mozilla/LDAP/API/autosplit.ix
-%{perl_vendorarch}/auto/Mozilla/LDAP/API/API.bs
 %attr(755,root,root) %{perl_vendorarch}/auto/Mozilla/LDAP/API/API.so
 %{_mandir}/man3/*
 %{_examplesdir}/%{name}-%{version}
