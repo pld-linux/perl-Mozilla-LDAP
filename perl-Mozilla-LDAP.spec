@@ -2,7 +2,6 @@
 # Conditional build:
 %bcond_without	tests	# do not perform "make test"
 #
-%include	/usr/lib/rpm/macros.perl
 Summary:	PerLDAP - Mozilla::LDAP perl modules
 Summary(pl.UTF-8):	PerLDAP - moduły perla Mozilla::LDAP
 Name:		perl-Mozilla-LDAP
